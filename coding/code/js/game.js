@@ -5,7 +5,8 @@ const key = {
 		37: 'left',
 		39: 'right',
 		88: 'attack',
-		90: 'jump',
+		67: 'slide',
+		90: 'jump', // 점프 기능 추가
 	}
 }
 
@@ -19,7 +20,19 @@ const bulletComProp = {
 }
 
 const gameBackground ={
-	gameBox: document.querySelector('.game')
+	gameBox: document.querySelector('.game'),
+	//blockBox: document.querySelector('.block'), -> 이 새끼는 왜 null값으로 뜨냐 ㅅㅂ 진짜
+}
+
+const stageInfo = {
+	stage: [],
+	totalScore: 0,
+	monster: [
+		{defaultMon: greenMon, bossMon: greenMonBoss},
+		{defaultMon: yellowMon, bossMon: yellowMonBoss},
+		{defaultMon: pinkMon, bossMon: pinkMonBoss}
+	],
+	callPosition: [1000, 5000, 9000]
 }
 
 const gameProp = {
@@ -38,7 +51,7 @@ const renderGame = () => {
 	allMonsterComProp.arr.forEach((arr, i) => {
 		arr.moveMonster();
 	});
-
+	stageInfo.stage.clearCheck();
 	window.requestAnimationFrame(renderGame);
 
 }
@@ -52,8 +65,8 @@ const endGame = () => {
 
 const setGameBackground = () => {
 	let parallaxValue = Math.min(0, (hero.movex-gameProp.screenWidth/3) * -1);
-
 	gameBackground.gameBox.style.transform = `translateX(${parallaxValue}px)`;
+	//console.log(gameBackground.blockBox); -> 하 시발
 }
 
 const windowEvent = () => {
@@ -80,11 +93,11 @@ const loadImg = () => {
 }
 
 let hero;
-
+let block;
 const init = () => {
 	hero = new Hero('.hero');
-	allMonsterComProp.arr[0] = new Monster(700, 7777);
-	allMonsterComProp.arr[1] = new Monster(1500, 5555);
+	stageInfo.stage = new Stage();
+	block = new Block(block_1);
 	loadImg();
 	windowEvent();
 	renderGame();
