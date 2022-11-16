@@ -328,7 +328,8 @@ class Bullet{
 
 		
 		var rockUrl = ("../../../lib/images/weapon/Rock2.png")
-		this.el.style.backgroundImage = "url('rockUrl')"
+		this.el.style.backgroundImage = "url('"+rockUrl+"')"
+		this.el.style.height = "64px"
 	}
 	moveBullet(){
 		let setRotate = '';
