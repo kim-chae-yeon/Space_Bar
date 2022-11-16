@@ -63,7 +63,7 @@ class Hero {
 		this.direction = 'right';
 		this.attackDamage = 10000;
 		this.hpProgress = 0;
-		this.hpValue = 50000;
+		this.hpValue = 100000;
 		this.defaultHpValue = this.hpValue;
 		this.realDamage = 0;
 		this.slideSpeed = 5;
@@ -84,9 +84,10 @@ class Hero {
 	}
 	keyMotion(){
 		if(key.keyDown['esc']){
-			window.location.replace('../../');
+			window.location.replace('/');
 		}
-		if(this.movex == 3000){
+		//포탈 키 눌렀을때 바뀌는 거 수정해야함
+		if(this.movex === 3000 && this.level === 3){
 			if(key.keyDown['portal']){
 				window.location.replace('../../');
 			}
@@ -95,8 +96,8 @@ class Hero {
 			this.direction = 'left';
 			this.el.classList.add('run');
 			this.el.classList.add('flip');
-
 			this.movex = this.movex <= 0 ? 0 : this.movex - this.speed;
+
 		}else if(key.keyDown['right']){
 			this.direction = 'right';
 			this.el.classList.add('run');

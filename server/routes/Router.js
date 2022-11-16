@@ -6,7 +6,7 @@ const heroCtrl = {
     get_hero_data : async (req, res) =>{
         connection.query('select wallet_address from hero_data',(error, rows) => {
             if(error) throw error;
-            //res.send(rows);
+            res.send(rows);
             console.log(rows)
         })
     },
