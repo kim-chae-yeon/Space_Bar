@@ -45,20 +45,16 @@ body {
 }
 
 #gamestartbtn{
-  margin-top: 30px;
   border: 5px solid #2f007c;
   width: 200px;
   height: 50px;
-  display: block;
-  align-items: center;
   border-radius: 12px;
-  justify-content: center;
   background-color: black;
   font-family: 'gmarket';
   font-weight: border;
   color:white;
-  margin-left: auto;
-  margin-right: auto;
+  float:right;
+  margin-left: 10px;
 }
 
 #logoutbtn{

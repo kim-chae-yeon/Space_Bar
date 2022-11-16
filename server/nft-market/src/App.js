@@ -157,62 +157,68 @@ function App() {
   }, [])
 
 
-  
+
   return (
     <div className="App">
       {/* top: 주소 잔고 */}
       <div style={{ backgroundColor: "black", padding: 10 }}>
-        <div id="titleouter" style={{textAlign:"center"}}>
-          <img src={logo} id="logo" width={450} />
+        <div id="titleouter"  style={{textAlign:"center"}}>
+          <img src={logo} id="logo" width={450} style={{ textAlign: "Center" }} />
         </div>
+        <div>
         <span id="mywallet" style={{ fontSize: 30, fontWeight: "bold", paddingLeft: 5, marginTop: 10 }}>MY Wallet</span>
         <span id="address">{myAddress}</span>
-        {(myAddress !== DEFAULT_ADDRESS )? ( <button id = "logoutbtn" onClick={logout}>LOGOUT</button> ) : null}
+        {(myAddress !== DEFAULT_ADDRESS) ? (<button id="logoutbtn" onClick={logout}>LOGOUT</button>) : null}
         <br />
         <Alert id="connect" onClick={getUserData} variant={"balance"} style={{ backgroundColor: "#2f007c", fontSize: 25 }}>
           {myAddress !== DEFAULT_ADDRESS ? `${myBalance} KLAY` : "지갑 연동하기"}
         </Alert>
-        {(qrvalue == 'DEFAULT' ) && (myAddress !== DEFAULT_ADDRESS )? ( <button id = "gamestartbtn" onClick={game_start}>START Space Bar</button> ) : null}
         <div>
-          현재 무기
+        {(qrvalue == 'DEFAULT') && (myAddress !== DEFAULT_ADDRESS) ? (
+            <div style={{float: "right", marginTop:10 }}>
+            <span>현재무기</span>
+            <img src={tool} alt={tool} height={50} marginLeft={5} />
+            <button id="gamestartbtn" onClick={game_start}>START Space Bar</button>
+            </div>
+            ) : null}
+
         </div>
-        <div>
-          <img src={tool} alt={tool} width={50}/>
-        </div>
+
         {/* DEFAULT 아닌 경우에만 QR 코드 */}
         {qrvalue !== 'DEFAULT' ? (
           <Container style={{ backgroundColor: "white", width: 300, height: 300, padding: 20 }}>
             <QRCode value={qrvalue} size={256} style={{ margin: "auto" }} />
           </Container>) : null}
-        
+
         <br />
-        
+        </div>
+
         {/* middle: 갤러리 (마켓, 내 지갑) */}
         {tab === 'MARKET' || tab === 'WALLET' ? (
-          <div className="container" style={{ padding: 0, width: "100%" }}>
+          <div className="container" style={{ padding: 0, width: "100%", marginTop: 70}}>
             {rows.map((o, rowIndex) => (
               <Row key={`rowkey${rowIndex}`}>
-                <Col style={{marginRight: 0, paddingRight: 0}}>
+                <Col style={{ marginRight: 0, paddingRight: 0 }}>
                   <Card onClick={() => {
-                    onClickCard(nfts[rowIndex*2].id, nfts[rowIndex*2].uri);
+                    onClickCard(nfts[rowIndex * 2].id, nfts[rowIndex * 2].uri);
                   }}>
-                    <Card.Img src={nfts[rowIndex*2].uri} />
+                    <Card.Img src={nfts[rowIndex * 2].uri} />
                   </Card>
-                  [{nfts[rowIndex*2].id}] NFT
+                  [{nfts[rowIndex * 2].id}] NFT
                 </Col>
-                <Col style={{marginRight: 0, paddingRight: 0}}>
+                <Col style={{ marginRight: 0, paddingRight: 0 }}>
                   {nfts.length > rowIndex * 2 + 1 ? (
                     <Card onClick={() => {
-                      onClickCard(nfts[rowIndex*2+1].id, nfts[rowIndex*2+1].uri);
+                      onClickCard(nfts[rowIndex * 2 + 1].id, nfts[rowIndex * 2 + 1].uri);
                     }}>
-                      <Card.Img src={nfts[rowIndex*2+1].uri} />
+                      <Card.Img src={nfts[rowIndex * 2 + 1].uri} />
                     </Card>
-                  ): null}
+                  ) : null}
 
                   {nfts.length > rowIndex * 2 + 1 ? (
-                    <>[{nfts[rowIndex*2+1].id}] NFT</>
-                  ): null}
-                  
+                    <>[{nfts[rowIndex * 2 + 1].id}] NFT</>
+                  ) : null}
+
                 </Col>
               </Row>
             ))}
@@ -263,7 +269,7 @@ function App() {
             >진행</Button>
           </Modal.Footer>
         )}
-        
+
       </Modal>
 
       {/* bottom: 탭 메뉴 */}
@@ -275,19 +281,19 @@ function App() {
               setTab("WALLET");
               fetchMyNFTs();
             }} className="row d-flex flex-column justify-content-center align-items-center">
-              <div><FontAwesomeIcon color="white" size="lg" icon={faWallet}/></div>
+              <div><FontAwesomeIcon color="white" size="lg" icon={faWallet} /></div>
             </div>
 
             <div onClick={() => {
               setTab("MARKET");
               fetchMarketNFTs();
             }} className="row d-flex flex-column justify-content-center align-items-center">
-              <div><FontAwesomeIcon color="white" size="lg" icon={faStore}/></div>
+              <div><FontAwesomeIcon color="white" size="lg" icon={faStore} /></div>
             </div>
 
           </div>
         </Nav>
-      </nav>     
+      </nav>
     </div>
   );
 }
