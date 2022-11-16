@@ -65,6 +65,18 @@
   will-change: transform;
 }
 
+.game_app .portal {
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	z-index: 11;
+	width: 200px;
+	height: 200px;
+	background-image: url('../images/portal1.PNG');
+	background-repeat: no-repeat;
+	will-change: transform;
+}
+
 .game_info {
   position: fixed;
   left: 0;

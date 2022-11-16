@@ -21,7 +21,7 @@ const block_3 = {
 
 
 const block_4 = {
-	name: 'block_3',
-	x : 3000,
+	name: 'portal',
+	x : 2990,
     y : 0,
 }

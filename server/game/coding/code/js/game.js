@@ -145,7 +145,10 @@ const init = () => {
 	loadImg();
 	windowEvent();
 	renderGame();
+
 }
+
+
 
 window.onload = () => {
 	init();
