@@ -10,6 +10,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 import './market.css';
 import logo from './images/logo.png';
+import rock from './images/Rock2.png';
 
 const DEFAULT_QR_CODE = 'DEFAULT';
 const DEFAULT_ADDRESS = "0x000000000000000000000000"
@@ -34,6 +35,7 @@ function App() {
 
   // 3. NFT
   const [nfts, setNfts] = useState([]);
+  const [tool, setTool] = useState(rock);
 
   // UI
   const [qrvalue, setQrvalue] = useState(DEFAULT_QR_CODE);
@@ -45,7 +47,8 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const [modalProps, setModalProps] = useState({
     title: "MODAL",
-    onConfirm: () => { }
+    onConfirm: () => { },
+    elseConfirm: () => { }
   });
 
   // NFT 갤러리 행
@@ -82,14 +85,17 @@ function App() {
     });
   }
 
-  const onClickCard = (id) => {
+  const onClickCard = (id, uri) => {
 
     if (tab === 'WALLET') {
       // 판매 하시겠습니까 모달
       setModalProps({
-        title: "NFT를 마켓에 올리시겠어요?",
+        title: "판매하시겠습니까 장착하시겠습니까?",
         onConfirm: () => {
           onClickMyCard(id);
+        },
+        elseConfirm: () => {
+          setTool(uri);
         }
       })
     }
@@ -167,7 +173,12 @@ function App() {
           {myAddress !== DEFAULT_ADDRESS ? `${myBalance} KLAY` : "지갑 연동하기"}
         </Alert>
         {(qrvalue == 'DEFAULT' ) && (myAddress !== DEFAULT_ADDRESS )? ( <button id = "gamestartbtn" onClick={game_start}>START Space Bar</button> ) : null}
-
+        <div>
+          현재 무기
+        </div>
+        <div>
+          <img src={tool} alt={tool} width={50}/>
+        </div>
         {/* DEFAULT 아닌 경우에만 QR 코드 */}
         {qrvalue !== 'DEFAULT' ? (
           <Container style={{ backgroundColor: "white", width: 300, height: 300, padding: 20 }}>
@@ -183,7 +194,7 @@ function App() {
               <Row key={`rowkey${rowIndex}`}>
                 <Col style={{marginRight: 0, paddingRight: 0}}>
                   <Card onClick={() => {
-                    onClickCard(nfts[rowIndex*2].id);
+                    onClickCard(nfts[rowIndex*2].id, nfts[rowIndex*2].uri);
                   }}>
                     <Card.Img src={nfts[rowIndex*2].uri} />
                   </Card>
@@ -192,7 +203,7 @@ function App() {
                 <Col style={{marginRight: 0, paddingRight: 0}}>
                   {nfts.length > rowIndex * 2 + 1 ? (
                     <Card onClick={() => {
-                      onClickCard(nfts[rowIndex*2+1].id);
+                      onClickCard(nfts[rowIndex*2+1].id, nfts[rowIndex*2].uri);
                     }}>
                       <Card.Img src={nfts[rowIndex*2+1].uri} />
                     </Card>
@@ -219,7 +230,6 @@ function App() {
           setShowModal(false);
         }}
       >
-
         <Modal.Header
           style={{ border: 0, backgroundColor: "black", opacity: 0.8 }}
         >
@@ -227,15 +237,33 @@ function App() {
             {modalProps.title}
           </Modal.Title>
         </Modal.Header>
-        <Modal.Footer style={{ border: 0, backgroundColor: "black", opacity: 0.8 }}>
-          <Button variant="secondary" onClick={() => { setShowModal(false); }}>닫기</Button>
-          <Button variant="primary" onClick={() => {
-            modalProps.onConfirm();
-            setShowModal(false);
-          }}
-            style={{ backgroundColor: "#2f007c", borderColor: "#2f007c" }}
-          >진행</Button>
-        </Modal.Footer>
+        {modalProps.title === "판매하시겠습니까 장착하시겠습니까?" ? (
+          <Modal.Footer style={{ border: 0, backgroundColor: "black", opacity: 0.8 }}>
+            <Button variant="secondary" onClick={() => { setShowModal(false); }}>닫기</Button>
+            <Button variant="primary" onClick={() => {
+              modalProps.onConfirm();
+              setShowModal(false);
+            }}
+              style={{ backgroundColor: "#2f007c", borderColor: "#2f007c" }}
+            >판매</Button>
+            <Button variant="success" onClick={() => {
+              modalProps.elseConfirm();
+              setShowModal(false);
+            }}
+            >장착</Button>
+          </Modal.Footer>
+        ) : (
+          <Modal.Footer style={{ border: 0, backgroundColor: "black", opacity: 0.8 }}>
+            <Button variant="secondary" onClick={() => { setShowModal(false); }}>닫기</Button>
+            <Button variant="primary" onClick={() => {
+              modalProps.onConfirm();
+              setShowModal(false);
+            }}
+              style={{ backgroundColor: "#2f007c", borderColor: "#2f007c" }}
+            >진행</Button>
+          </Modal.Footer>
+        )}
+        
       </Modal>
 
       {/* bottom: 탭 메뉴 */}
