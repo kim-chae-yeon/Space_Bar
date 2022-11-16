@@ -203,7 +203,7 @@ function App() {
                 <Col style={{marginRight: 0, paddingRight: 0}}>
                   {nfts.length > rowIndex * 2 + 1 ? (
                     <Card onClick={() => {
-                      onClickCard(nfts[rowIndex*2+1].id, nfts[rowIndex*2].uri);
+                      onClickCard(nfts[rowIndex*2+1].id, nfts[rowIndex*2+1].uri);
                     }}>
                       <Card.Img src={nfts[rowIndex*2+1].uri} />
                     </Card>
