@@ -18,3 +18,10 @@ const block_3 = {
 	x : 1000,
     y : -280,
 }
+
+
+const block_4 = {
+	name: 'block_3',
+	x : 3000,
+    y : 0,
+}

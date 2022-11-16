@@ -1,4 +1,3 @@
-
 class Stage {
 	constructor(){
 		this.level = 0;
@@ -20,7 +19,7 @@ class Stage {
 		this.textBox.appendChild(this.textNode);
 		this.parentNode.appendChild(this.textBox);
 
-		setTimeout(() => this.textBox.remove(), 1500);
+		setTimeout(() => this.textBox.remove(), 9999);
 	}
 
 	callMonster(){		
@@ -84,6 +83,14 @@ class Hero {
 		this.error_jump = 0; // 더블 점프를 막기 위한 변수
 	}
 	keyMotion(){
+		if(key.keyDown['esc']){
+			window.location.replace('../../');
+		}
+		if(this.movex == 3000){
+			if(key.keyDown['portal']){
+				window.location.replace('../../');
+			}
+		}
 		if(key.keyDown['left']){
 			this.direction = 'left';
 			this.el.classList.add('run');
@@ -94,8 +101,7 @@ class Hero {
 			this.direction = 'right';
 			this.el.classList.add('run');
 			this.el.classList.remove('flip');
-
-			this.movex = this.movex >= 2945 ? 2945 : this.movex + this.speed;
+			this.movex = this.movex >= 3000 ? 3000 : this.movex + this.speed;
 		}
 
 		if(key.keyDown['attack']){
@@ -113,9 +119,10 @@ class Hero {
 
 				this.el.classList.add('slide');
 				if(this.direction === 'right'){
-					this.movex = this.movex + this.slideSpeed;
+					this.movex = this.movex >= 3000 ? 3000 : this.movex + this.slideSpeed;
 				}else{
-					this.movex = this.movex - this.slideSpeed;
+					this.movex = this.movex <= 0 ? 0 : this.movex - this.slideSpeed;
+
 				}
 
 				if(this.slideTime > this.slideMaxTime){
@@ -304,6 +311,8 @@ class Bullet{
 		this.y = 0;
 		this.speed = 15;
 		this.distance = 0;
+		this.maxdistance = 500;
+		this.mindistance = -500;
 		this.bulletDirection = 'right';
 		this.init();
 	}
@@ -529,7 +538,6 @@ class Block{
 	}
 
 }
-
 
 
 

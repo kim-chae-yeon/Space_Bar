@@ -105,6 +105,8 @@ function App() {
     setShowModal(true);
   }
 
+
+  //game start
   const game_start = () => {
     setModalProps({
       title: "게임을 시작하시겠습니까?",
@@ -133,6 +135,8 @@ function App() {
     setShowModal(true);
   };
 
+
+  //로그아웃
   const logout = () => {
     setMyAddress(DEFAULT_ADDRESS);
     setMyBalance("0");

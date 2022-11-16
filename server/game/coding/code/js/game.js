@@ -2,6 +2,8 @@
 const key = {
 	keyDown : {},
 	keyValue : {
+		27: 'esc',
+		80: 'portal',
 		37: 'left',
 		39: 'right',
 		88: 'attack',
@@ -63,6 +65,7 @@ const endGame = () => {
 	key.keyDown.left = false;
 	key.keyDown.right = false;
 	document.querySelector('.game_over').classList.add('active');
+
 }
 
 const setGameBackground = () => {
@@ -111,6 +114,7 @@ const init = () => {
 	blockComProp.arr[0] = new Block(block_1);
 	blockComProp.arr[1] = new Block(block_2);
 	blockComProp.arr[2] = new Block(block_3);
+	blockComProp.arr[3] = new Block(block_4);
 	loadImg();
 	windowEvent();
 	renderGame();

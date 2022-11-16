@@ -10,6 +10,7 @@ const heroCtrl = {
             console.log(rows)
         })
     },
+    //연결중
     insert_WalletAddress : async (req, res) => {
         const id = req.body.myAddress;
         const sql = `insert into hero_data(wallet_address) values(?);`
