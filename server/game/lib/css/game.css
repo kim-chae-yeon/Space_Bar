@@ -355,10 +355,9 @@
 	z-index: 90;
 	width: 64px;
 	height: 64px;
-	background-image: url('../images/data/Rock2.png');
 	background-size: cover;
 	background-repeat: no-repeat;
-	will-change: transform;
+	will-change: transform, backgroundImage;
 }
 
 @keyframes monster_run {

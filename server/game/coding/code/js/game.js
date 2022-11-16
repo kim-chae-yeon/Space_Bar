@@ -1,4 +1,3 @@
-
 const key = {
 	keyDown : {},
 	keyValue : {
@@ -10,6 +9,7 @@ const key = {
 		67: 'slide',
 		90: 'jump', // 점프 기능 추가
 	}
+
 }
 
 const allMonsterComProp = {
@@ -60,6 +60,7 @@ const renderGame = () => {
 
 }
 
+//game over
 const endGame = () => {
 	gameProp.gameOver = true;
 	key.keyDown.left = false;
@@ -85,7 +86,16 @@ const setGameBackground = () => {
 
 const windowEvent = () => {
 	window.addEventListener('keydown', e => {
-		if(!gameProp.gameOver) key.keyDown[key.keyValue[e.which]] = true;
+		if(gameProp.gameOver) {
+			key.keyDown[key.keyValue[e.which]] =false;
+			key.keyDown['esc'] = true;
+			if(key.keyDown['esc']){
+				window.location.replace('/');
+			}
+		}
+		else
+			key.keyDown[key.keyValue[e.which]] =true;
+
 	});
 
 	window.addEventListener('keyup', e => {
