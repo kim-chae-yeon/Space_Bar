@@ -2,6 +2,7 @@ class Stage {
 	constructor(){
 		this.level = 0;
 		this.isStart = false;
+		this.portal_flag = false;
 		//this.stageStart();
 	}
 	// stageStart(){
@@ -61,9 +62,9 @@ class Hero {
 		this.movex = 0;
 		this.speed = 8;
 		this.direction = 'right';
-		this.attackDamage = 10000;
+		this.attackDamage = 1;
 		this.hpProgress = 0;
-		this.hpValue = 100000;
+		this.hpValue = 10;
 		this.defaultHpValue = this.hpValue;
 		this.realDamage = 0;
 		this.slideSpeed = 5;
@@ -72,7 +73,7 @@ class Hero {
 		this.slideDown = false;
 		this.level = 1;
 		this.exp = 0;
-		this.maxExp = 3000;
+		this.maxExp = 10;
 		this.expProgress = 0;
 		this.movey = 0;
 		this.jumptimer = 0;
@@ -87,9 +88,9 @@ class Hero {
 			window.location.replace('/');
 		}
 		//포탈 키 눌렀을때 바뀌는 거 수정해야함
-		if(this.movex === 3000 && this.level === 3){
+		if(this.movex === 3000 && this.level >= 3){
 			if(key.keyDown['portal']){
-				window.location.replace('../../');
+				stageInfo.portal_flag = true;
 			}
 		}
 		if(key.keyDown['left']){
@@ -111,6 +112,7 @@ class Hero {
 				bulletComProp.arr.push(new Bullet());
 
 				bulletComProp.launch = true;
+			
 			}
 		}
 
@@ -235,7 +237,7 @@ class Hero {
 		this.realDamage = this.attackDamage - Math.round(Math.random() * this.attackDamage * 0.1);
 	}
 	heroUpgrade(){
-		this.attackDamage += 5000;
+		this.attackDamage += 1;
 	}
 	updateExp(exp){
 		this.exp += exp;
@@ -249,7 +251,7 @@ class Hero {
 	levelUp(){
 		this.level += 1;
 		this.exp = 0;
-		this.maxExp = this.maxExp + this.level * 1000;
+		this.maxExp = this.maxExp + this.level * 2;
 		document.querySelector('.level_box strong').innerText = this.level;
 		const levelGuide = document.querySelector('.hero_box .level_up');
 		levelGuide.classList.add('active');
@@ -310,7 +312,7 @@ class Bullet{
 		this.el.className = 'hero_bullet';
 		this.x = 0;
 		this.y = 0;
-		this.speed = 15;
+		this.speed = 20;
 		this.distance = 0;
 		this.maxdistance = 500;
 		this.mindistance = -500;
@@ -336,8 +338,15 @@ class Bullet{
 		if(this.bulletDirection === 'left'){
 			this.distance -= this.speed;
 			setRotate = 'rotate(180deg)';
+			if(this.distance <= hero.movex-600){
+				this.el.remove()
+			}
+
 		}else{
 			this.distance += this.speed;
+			if(this.distance >= hero.movex+600){
+				this.el.remove()
+			}
 		}
 
 		this.el.style.transform = `translate(${this.distance}px, ${this.y}px) ${setRotate}`;

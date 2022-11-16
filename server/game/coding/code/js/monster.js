@@ -20,11 +20,11 @@ const yellowMon = {
 
 const greenMon = {
 	name: 'green_mon',
-	hpValue: 42000,
+	hpValue: 5,
 	speed: 4,
-	crashDamage: 300,
+	crashDamage: 1,
 	score: 1000,
-	exp: 1000
+	exp: 10
 }
 
 const greenMonBoss = {
