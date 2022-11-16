@@ -325,6 +325,10 @@ class Bullet{
 		this.distance = this.x;
 		this.el.style.transform = `translate(${this.x}px, ${this.y}px)`;
 		this.parentNode.appendChild(this.el);
+
+		
+		var rockUrl = ("../../../lib/images/weapon/Rock2.png")
+		this.el.style.backgroundImage = "url('rockUrl')"
 	}
 	moveBullet(){
 		let setRotate = '';
