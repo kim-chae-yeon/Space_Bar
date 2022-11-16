@@ -20,11 +20,15 @@ class Stage {
 		this.textBox.appendChild(this.textNode);
 		this.parentNode.appendChild(this.textBox);
 
+<<<<<<< HEAD
 		stageUrl = ("../../../lib/images/background/stage2_image.jpg")
 
 		this.parentNode.style.backgroundImage = "url('"+stage1Url+"')"
 
 		setTimeout(() => this.textBox.remove(), 9999);
+=======
+		setTimeout(() => this.textBox.remove(), 1000);
+>>>>>>> 89d15457cdfa6f0a9e3ba364debe4e0607b1871d
 	}
 
 	callMonster(){		
@@ -70,7 +74,7 @@ class Hero {
 		this.direction = 'right';
 		this.attackDamage = 1;
 		this.hpProgress = 0;
-		this.hpValue = 10;
+		this.hpValue = 1000000;
 		this.defaultHpValue = this.hpValue;
 		this.realDamage = 0;
 		this.slideSpeed = 5;
@@ -236,7 +240,7 @@ class Hero {
 	}
 	crash(){
 		this.el.classList.add('crash');
-		setTimeout(() => this.el.classList.remove('crash'), 400);
+		setTimeout(() => this.el.classList.remove('crash'), 1000);
 	}
 	dead(){
 		hero.el.classList.add('dead');
@@ -323,8 +327,6 @@ class Bullet{
 		this.y = 0;
 		this.speed = 20;
 		this.distance = 0;
-		this.maxdistance = 500;
-		this.mindistance = -500;
 		this.bulletDirection = 'right';
 		this.init();
 	}
@@ -514,6 +516,7 @@ class Monster {
 		}
 		this.el.style.transform = `translate(${this.movex}px) ${this.setRotate}`;
 		this.crash();
+		setTimeout(function(){},3000);
 	}
 
 	crash(){
