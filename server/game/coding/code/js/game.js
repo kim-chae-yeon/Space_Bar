@@ -26,6 +26,7 @@ const bulletComProp = {
 
 const gameBackground ={
 	gameBox: document.querySelector('.game'),
+
 }
 
 const stageInfo = {
@@ -80,6 +81,22 @@ const setGameBackground = () => {
 	{
 		blockComProp.arr[i].el.style.transform = `translateX(${parallaxValue}px)`;
 	}
+
+	var stageUrl
+
+	if(stageInfo.portal_flag == true){
+		stageUrl = ("../../../lib/images/background/stage2_image.jpg")
+	} else {
+		stageUrl = ("../../../lib/images/background/stage1_image.jpg")
+	}
+
+	gameBackground.gameBox.style.backgroundImage = "url('"+stageUrl+"')"
+
+
+	// nextStage(){
+	// 	var stage2Url = ("../../../lib/images/background/stage2_image.jpg")
+	// 	this.parentNode.style.backgroundImage = "url('"+stage2Url+"')"
+	// }
 
 	// 구조물 페럴릭스 적용 완료
 }

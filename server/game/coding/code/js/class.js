@@ -20,6 +20,10 @@ class Stage {
 		this.textBox.appendChild(this.textNode);
 		this.parentNode.appendChild(this.textBox);
 
+		stageUrl = ("../../../lib/images/background/stage2_image.jpg")
+
+		this.parentNode.style.backgroundImage = "url('"+stage1Url+"')"
+
 		setTimeout(() => this.textBox.remove(), 9999);
 	}
 
@@ -40,6 +44,7 @@ class Stage {
 				this.level++;		
 			}
 		});
+
 		// if(allMonsterComProp.arr.length === 0 && this.isStart){
 		// 	this.isStart = false;
 		// 	this.level++;
@@ -54,6 +59,7 @@ class Stage {
 		// }
 
 	}
+
 }
 
 class Hero {
@@ -87,11 +93,14 @@ class Hero {
 		if(key.keyDown['esc']){
 			window.location.replace('/');
 		}
+		var stageUrl = ("../../../lib/images/background/stage1_image.jpg")
 		//포탈 키 눌렀을때 바뀌는 거 수정해야함
 		if(this.movex === 3000 && this.level >= 3){
 			if(key.keyDown['portal']){
 				stageInfo.portal_flag = true;
+				// stageInfo.nextStage()
 			}
+			document.querySelector('.game_app').style.backgroundImage = "url('"+stageUrl+"')"
 		}
 		if(key.keyDown['left']){
 			this.direction = 'left';
