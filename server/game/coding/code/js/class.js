@@ -336,9 +336,14 @@ class Bullet{
 		this.parentNode.appendChild(this.el);
 
 		
-		var rockUrl = ("../../../lib/images/weapon/Rock2.png")
-		this.el.style.backgroundImage = "url('"+rockUrl+"')"
-		this.el.style.height = "64px"
+		// var rockUrl = ("../../../lib/images/weapon/Rock2.png")
+		// this.el.style.backgroundImage = "url('"+rockUrl+"')"
+		// this.el.style.height = "64px"
+
+		var shiftUrl = ("../../../lib/images/weapon/3_shift.jpg")
+		this.el.style.backgroundImage = "url('"+shiftUrl+"')"
+		this.el.style.height = "30px"
+
 	}
 	moveBullet(){
 		let setRotate = '';
